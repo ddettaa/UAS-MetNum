@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 int main (){
     int pilihan;
@@ -21,6 +22,27 @@ int main (){
         switch(rumus){
             case 1:
                 printf("Anda memilih Rumus 1.\n");
+                double x, g_x, f_x;
+                int iterasi = 1;
+                const double error = 0.001;
+                x = 2;
+
+            printf("+-------+------------+------------+------------+------------+\n");
+            printf("| %-5s | %-10s | %-10s | %-10s | %-10s |\n",
+                   "Iter", "x", "g(x)", "f(x)", "Status");
+            printf("+-------+------------+------------+------------+------------+\n");
+        
+                do
+                {
+                    g_x = - 6 / x-7;
+                    f_x = (x*x)-7*x+6;
+                    printf("| %-5d | %10.6f | %10.6f | %10.6f | %10.6f |\n",
+                    iterasi, x, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                    x = g_x;
+                    iterasi++;
+                } while (fabs(f_x)>=error);
+                
+
                 break;
         }
             break;
