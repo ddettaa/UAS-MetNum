@@ -102,6 +102,6 @@ int main()
         // Tambahkan kode untuk metode Secant di sini
         break;
     default:
-        printf("Pilihan tidak valid. Silakan c lagi.\n");
+        printf("Pilihan tidak valid. Silakan coba lagi.\n");
     }
 }
