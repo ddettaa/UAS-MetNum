@@ -117,14 +117,8 @@ int main()
             printf("| %-5d | %-10.6f | %-10.6f | %-10.6f | %-10.6f | %-10.6f | %-12s |\n",
                    iterasi, x_old, f_x, f_x_aksen, x_new, fabs(f_x), (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
             x = x_new;
-            if (fabs(f_x) < error)
-            {
-                printf("Akar ditemukan pada iterasi %d: x = %.6f\n", iterasi, x_new);
-                break;
-            }
             iterasi++;
         }
-        break;
     }
         break;
     case 3:
