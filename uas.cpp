@@ -38,12 +38,11 @@ int main()
 
             for (i = 0; i < 15; i++)
             {
-                double x_old = x;
-                g_x = -6 / (x_old - 7);
-                x = g_x;
+                g_x = -6 / (x - 7);
                 f_x = (x * x) - 7 * x + 6;
                 printf("| %-5d | %10.6f | %10.6f | %10.6f | %-8s |\n",
-                       iterasi, x_old, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                       iterasi, x, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                x = g_x;
                 iterasi++;
             }
         }
@@ -62,18 +61,18 @@ int main()
 
             for (i = 0; i < 15; i++)
             {
-                double x_old = x;
-                g_x = ((x_old * x_old) - 6) / 7;
-                x = g_x;
+                g_x = ((x * x) - 6) / 7;
                 f_x = (x * x) - 7 * x + 6;
                 printf("| %-5d | %10.6f | %10.6f | %10.6f | %-8s |\n",
-                       iterasi, x_old, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                       iterasi, x, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                x = g_x;
                 iterasi++;
             }
         }
         break;
-        case 3:{
-             printf("Anda memilih Rumus 3.\n");
+        case 3:
+        {
+            printf("Anda memilih Rumus 3.\n");
             int iterasi = 1;
             double i, x, g_x, f_x;
             const double error = 0.001;
@@ -85,12 +84,11 @@ int main()
 
             for (i = 0; i < 25; i++)
             {
-                double x_old = x;
-                g_x = sqrt(7 * x_old - 6);
-                x = g_x;
+                g_x = sqrt(7 * x - 6);
                 f_x = (x * x) - 7 * x + 6;
                 printf("| %-5d | %10.6f | %10.6f | %10.6f | %-8s |\n",
-                       iterasi, x_old, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                       iterasi, x, g_x, f_x, (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+                x = g_x;
                 iterasi++;
             }
         }
@@ -98,66 +96,65 @@ int main()
         break;
     case 2:
         printf("Anda memilih Metode Newton Raphson.\n");
+        // Tambahkan kode untuk metode Newton Raphson di sini
         {
-            int iterasi = 1;
-            double i, x, g_x, f_x, f_prime;
-            const double error = 0.001;
-            x = 0;
+        printf("Anda memilih Metode Newton Raphson.\n");
+        double x, x_old, f_x, f_x_aksen, x_new;
+        int iterasi = 1;
+        const double error = 0.01;
+        x = 0;
+        printf("+-------+------------+-------------+------------+------------+------------+------------+\n");
+        printf("| %-5s | %-10s | %-10s | %-10s | %-10s | %-10s | %-12s |\n",
+               "iter", "x_old", "fx", "fx_aksen", "x_new", "galat", "keterangan");
+        printf("+-------+------------+-------------+------------+------------+------------+------------+\n");
 
-            printf("+-------+------------+------------+------------+------------+\n");
-            printf("| %-5s | %-10s | %-10s | %-10s | %-8s |\n",
-                   "Iter", "x", "g(x)", "f(x)", "Status");
-            printf("+-------+------------+------------+------------+------------+\n");
-
-            for (i = 0; i < 15; i++)
+        for (int i = 0; i < 10; i++)
+        {
+            x_old = x;
+            f_x = (x_old * x_old) - 7 * x_old + 6; // f(x) = x^2 - 7x + 6
+            f_x_aksen = 2 * x_old - 7;             // f'(x) = 2x - 7
+            x_new = x_old - (f_x / f_x_aksen);
+            printf("| %-5d | %-10.6f | %-10.6f | %-10.6f | %-10.6f | %-10.6f | %-12s |\n",
+                   iterasi, x_old, f_x, f_x_aksen, x_new, fabs(f_x), (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
+            x = x_new;
+            if (fabs(f_x) < error)
             {
-                double x_old = x;
-                f_x = (x_old * x_old) - 7 * x_old + 6;
-                f_prime = 2 * x_old - 7;
-                g_x = x_old - f_x / f_prime;
-                x = g_x;
-                f_x = (x * x) - 7 * x + 6;
-                printf("| %-5d | %10.6f | %10.6f | %10.6f | %-8s |\n",
-                       iterasi, x_old, g_x, f_x,
-                       (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
-                iterasi++;
+                printf("Akar ditemukan pada iterasi %d: x = %.6f\n", iterasi, x_new);
+                break;
             }
+            iterasi++;
         }
+        break;
+    }
         break;
     case 3:
+    {
         printf("Anda memilih Metode Secant.\n");
+        // Tambahkan kode untuk metode Secant di sini
+        int iterasi = 1;
+        double x0, x1, f_x1, f_xi, x_new;
+        double const error = 0.001;
+        x0 = 0;
+        x1 = 0.5;
+        printf("+-------+------------+------------+------------+------------+------------+------------+------------+\n");
+        printf("| %-5s | %-10s | %-10s | %-10s | %-10s | %-10s | %-12s | %-9s |\n",
+               "Iter", "x0", "x1", "f_x1", "f_xi", "x_new", "|x_new-x1|", "Status");
+        printf("+-------+------------+------------+------------+------------+------------+------------+------------+\n");
+        
+        for (int i = 0; i < 15; i++)
         {
-            int iterasi = 1;
-            double i, x0, x1, g_x, f_x;
-            const double error = 0.001;
-            x0 = 0;
-            x1 = 0.5;
-
-            printf("+-------+------------+------------+------------+------------+\n");
-            printf("| %-5s | %-10s | %-10s | %-10s | %-8s |\n",
-                   "Iter", "x", "g(x)", "f(x)", "Status");
-            printf("+-------+------------+------------+------------+------------+\n");
-
-            for (i = 0; i < 15; i++)
-            {
-                double f_x0 = (x0 * x0) - 7 * x0 + 6;
-                double f_x1 = (x1 * x1) - 7 * x1 + 6;
-                if (fabs(f_x1 - f_x0) < 1e-12)
-                    break;
-                double x_old = x1;
-                g_x = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0);
-                x0 = x1;
-                x1 = g_x;
-                f_x = (x1 * x1) - 7 * x1 + 6;
-                printf("| %-5d | %10.6f | %10.6f | %10.6f | %-8s |\n",
-                       iterasi, x_old, g_x, f_x,
-                       (fabs(f_x) < error) ? "Berhenti" : "Lanjut");
-                iterasi++;
-                if (fabs(f_x) < error)
-                    break;
-            }
+            f_x1 = (x0 * x0) - 7 * x0 + 6; 
+            f_xi = (x1 * x1) - 7 * x1 + 6; 
+            x_new = x1 - ((f_xi * (x1 - x0)) / (f_xi - f_x1)); 
+            printf("| %-5d | %10.6f | %10.6f | %10.6f | %10.6f | %10.6f | %12.6f | %-9s |\n",
+            iterasi, x0, x1, f_x1, f_xi, x_new, fabs(x_new - x1), (fabs(f_x1) < error) ? "Berhenti" : "Lanjut");
+            x0 = x1;
+            x1 = x_new;
+            iterasi++;
         }
+
         break;
+    }
     default:
         printf("Pilihan tidak valid. Silakan coba lagi.\n");
     }
